@@ -15,5 +15,5 @@ var manualStringReversal = (string) => {
     end --;
     console.log(string)
   }
-  return string
+  return string.join('')
 }
