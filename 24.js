@@ -30,6 +30,7 @@ for(var i = 0; i < 10 ; i++) {
 
 const reverseList = (head) => {
   var currentNode = myList.head;
+  myList.tail = currentNode
   var nextNode = myList.head.next;
   var prevNode = null
   while(currentNode !== null) {
@@ -44,7 +45,8 @@ const reverseList = (head) => {
     if(currentNode === null) {
       currentNode = nextNode
       currentNode.next = prevNode
-      return currentNode
+      myList.head = currentNode
+      return myList.head
     }
   }
   return currentNode
