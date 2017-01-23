@@ -1,0 +1,53 @@
+/*
+in O(log(n)) time and given an array that is increasing until a certain index and then subsequently decreasing after that index
+(which essentially is a mountain, with a max value at its peak) determine if a certain number exists. 
+*/
+
+const findValueInMountain = (array, value) => {
+  var midpoint = Math.floor(array.length/2);
+  var upper = array.length - 1;
+  var lower = array[0];
+  var i = 0;
+  const checkForValue = (value, side) => {
+    if(side === 'right'){
+      let upper = array.length - 1;
+      let lower = midpoint;
+    } else {
+      let lower = array[0];
+      let upper = midpoint;
+    }
+    var newMidpoint = Math.floor((upper + lower)/2)
+    i = 0;
+    while(array[newMidpoint] !== value && i < 1000 ){
+      if(value > array[newMidpoint]){
+        lower = newMidpoint;
+      } else {
+        upper = newMidpoint
+      }
+      i++
+      newMidpoint = Math.floor((upper + lower)/2)
+    }
+      if(array[newMidpoint] === value) {
+        return newMidpoint
+      }
+  }
+  while(array[midpoint + 1] > array[midpoint] || array[midpoint - 1] > array[midpoint]){
+    if(array[midpoint + 1] > array[midpoint]){
+      lower = midpoint;
+    }
+    else if(array[midpoint - 1] > array[midpoint]) {
+      upper = midpoint;
+    }
+     midpoint = Math.floor((upper + lower)/ 2)
+  }
+  if(checkForValue(value, 'left') || checkForValue(value, 'right')){
+    return true;
+  } else {
+    return false;
+  }
+
+}
+
+var myArray = [1,2,3,4,5,6,7,8,9,10,9,8,7,6,5,4,2,1]
+
+findValueInMountain(myArray, 3)
